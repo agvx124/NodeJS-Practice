@@ -5,6 +5,9 @@ const Body = require('koa-body')({multipart: true});
 const cors = require('koa-cors');
 const Http = require('http');
 
+const hostname = "10.80.163.88";
+const port = "3000";
+
 const apiRouter = require('./api');
 
 const app = new Koa();
@@ -14,8 +17,8 @@ app.use(Body);
 app.use(cors());
 app.use(apiRouter.routes());
 
-server.listen(5000, () => {
-    console.log("Server is listening on port 5000");
+server.listen(port, hostname, () => {
+    console.log("Server is listening on Host - " + hostname + " Port - " + port);
 });
 
 

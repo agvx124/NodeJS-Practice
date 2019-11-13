@@ -36,7 +36,7 @@ exports.getUser = async (ctx) => {
         console.log(id);
         let user = await model.user.findOne({
             where : {
-                id : id
+                id : id,
             }
         });
 
@@ -45,7 +45,7 @@ exports.getUser = async (ctx) => {
             ctx.status = 404;
             ctx.body = {
                 status: 404,
-                message: '입력한 아이디가 없습니다.'
+                message: '입력된 정보가 없습니다.'
             };
             return;
         }
