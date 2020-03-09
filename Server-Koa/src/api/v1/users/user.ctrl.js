@@ -103,7 +103,7 @@ exports.postUser = async (ctx) => {
             data: newUser
         }
     }
-    catch(ex) {
+    catch (ex) {
         ctx.status = 500;
         ctx.body = {
             status: 500,

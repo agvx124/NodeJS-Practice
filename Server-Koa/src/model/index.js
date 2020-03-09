@@ -2,7 +2,11 @@ const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('node_practice', 'root', '1234', {
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectOptions: {
+      useUTC: false, // for reading from database
+    },
+    timezone: '+09:00'
 });
 
 const user = sequelize.define("user", {
@@ -25,13 +29,40 @@ const user = sequelize.define("user", {
     timestamps: false,
 });
 
-user.sync();
+const noticeBoard = sequelize.define("noticeBoard", {
+    idx: {
+        field: 'idx',
+        type: Sequelize.DataTypes.INTEGER(10),
+        autoIncrement: true,
+        primaryKey: true
+    },
+    title: {
+        field: 'title',
+        type: Sequelize.DataTypes.STRING(20),
+        allowNull: false
+    },
+    content: {
+        field: 'content',
+        type: Sequelize.DataTypes.STRING(100),
+        allowNull: false
+    },
+    writer: {
+        field: 'writer',
+        type: Sequelize.DataTypes.STRING(10),
+        allowNull: false
+    }
+});
 
+user.sync();
+noticeBoard.sync();
 // const result = user.findAll({  });
 
 module.exports = {
     getUser: () => {
         return user.findAll();
-    },
-    user
+    },user,
+
+    getNoticeBoard: () => {
+        return noticeBoard.findAll();
+    },noticeBoard
 }
